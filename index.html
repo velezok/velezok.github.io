@@ -1,9 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Made you look</title>
+    
+    <!-- Importamos una fuente monospace muy elegante desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Configuramos las variables de color y el efecto de luz (glow) */
+        :root {
+            --bg-color: #0a0a0a; /* Un negro casi puro, muy elegante */
+            --light-gray: #d1d5db;
+            /* Efecto de resplandor usando sombras de texto múltiples */
+            --glow-effect: 
+                0 0 10px rgba(209, 213, 219, 0.4),
+                0 0 20px rgba(209, 213, 219, 0.6),
+                0 0 30px rgba(209, 213, 219, 0.2);
+        }
+
+        /* Estilos generales de la página */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--light-gray);
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Hacemos que el scroll sea suave */
+            scroll-behavior: smooth; 
+        }
+
+        /* Contenedor de las flechas */
+        #arrow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Una separación gigante entre cada flecha para hacer la página súper larga */
+            gap: 250px; 
+            padding-top: 100px;
+        }
+
+        /* Estilo individual de cada flecha */
+        .arrow {
+            font-size: 3rem; /* Tamaño grande */
+            font-weight: 400;
+            text-shadow: var(--glow-effect);
+            /* Animación suave de "respiración" para el brillo */
+            animation: pulse-glow 2s infinite alternate ease-in-out;
+        }
+
+        /* Contenedor del texto final */
+        #bottom-text-container {
+            /* Margen gigante arriba para que no se vea hasta el final */
+            margin-top: 400px; 
+            margin-bottom: 150px; /* Espacio al final de la página */
+            text-align: center;
+        }
+
+        /* Estilo del texto final */
+        .final-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: var(--glow-effect);
+            animation: pulse-glow 2s infinite alternate ease-in-out;
+            letter-spacing: -2px; /* Junta un poco las letras al estilo hacker/terminal */
+        }
+
+        /* Animación para hacer que el brillo palpite suavemente */
+        @keyframes pulse-glow {
+            0% {
+                text-shadow: 0 0 5px rgba(209, 213, 219, 0.3), 0 0 10px rgba(209, 213, 219, 0.2);
+                opacity: 0.8;
+            }
+            100% {
+                text-shadow: var(--glow-effect);
+                opacity: 1;
+            }
+        }
+
+        /* Ajustes para pantallas de celular */
+        @media (max-width: 600px) {
+            .arrow { font-size: 2.5rem; }
+            .final-text { font-size: 1.8rem; }
+            #arrow-container { gap: 200px; }
+        }
+    </style>
 </head>
 <body>
-    <h1></h1>
+
+    <!-- Aquí se inyectarán las flechas desde JavaScript -->
+    <div id="arrow-container"></div>
+
+    <!-- El texto final -->
+    <div id="bottom-text-container">
+        <div class="final-text">made you look lol</div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT ---
+        // Esto crea automáticamente las flechas para hacer la página inmensamente larga
+        
+        const arrowContainer = document.getElementById('arrow-container');
+        
+        // ¿Cuántas flechas quieres? 50 flechas con una separación de 250px hacen una página muy, muy larga.
+        // Puedes cambiar este número si quieres que sea aún más larga.
+        const numberOfArrows = 50; 
+
+        for (let i = 0; i < numberOfArrows; i++) {
+            const arrowElement = document.createElement('div');
+            arrowElement.classList.add('arrow');
+            
+            // Usamos el código HTML para la flecha hacia abajo (↓)
+            arrowElement.innerHTML = '&darr;'; 
+            
+            arrowContainer.appendChild(arrowElement);
+        }
+    </script>
 </body>
 </html>
